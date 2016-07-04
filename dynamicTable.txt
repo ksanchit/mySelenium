@@ -1,0 +1,37 @@
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
+
+public class DynamicHtmlTable {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		WebDriver driver = new FirefoxDriver();
+		
+		driver.get("http://www.w3schools.com/html/html_tables.asp");
+		WebElement htmlTable = driver.findElement(By.xpath(".//*[@id='main']/table"));
+		
+		List<WebElement> rows = htmlTable.findElements(By.tagName("tr"));
+		
+		for(int rNum = 0 ; rNum<rows.size(); rNum++){
+				
+				List<WebElement> columns = rows.get(rNum).findElements(By.tagName("td"));
+				
+				System.out.println("Number of Columns " + columns.size());
+				for(int cNum = 0 ; cNum<columns.size();cNum++){
+					System.out.println(columns.get(cNum).getText());
+				}
+		}
+		
+		driver.quit();
+		
+	}
+
+}
